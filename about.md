@@ -7,7 +7,7 @@ permalink: /about/
 # About Solomon
 
 ## Professional Background
-I am software engineer that specialises in building backend systems, distributed systems, and optimising performance.
+I am a software engineer specialising in building backend and distributed systems and optimising performance, and most recently, quantitative finance and C++
 
 ### Technical Expertise
 - **Languages**: Node.js, C++, PostgreSQL, JavaScript
