@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2026-01-01T01:33:32+01:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Solomon’s Blog</title><subtitle>A personal blog</subtitle><author><name>Solomon Oladiran</name></author><entry><title type="html">Hello World - Starting My Technical Journey</title><link href="http://localhost:4000/blog/hello-world/" rel="alternate" type="text/html" title="Hello World - Starting My Technical Journey" /><published>2026-01-01T11:00:00+01:00</published><updated>2026-01-01T11:00:00+01:00</updated><id>http://localhost:4000/blog/hello-world</id><content type="html" xml:base="http://localhost:4000/blog/hello-world/"><![CDATA[<h1 id="welcome-to-my-blog">Welcome to My Blog!</h1>
+
+<p>After years of building web applications and microservices at scale, I’m embarking on an exciting transition into quantitative finance. This blog will document my journey and share technical insights along the way.</p>
+
+<h2 id="what-you-can-expect">What You Can Expect</h2>
+
+<h3 id="technical-deep-dives">Technical Deep-Dives</h3>
+<ul>
+  <li>C++ optimization techniques for high-frequency trading</li>
+  <li>System architecture for low-latency applications</li>
+  <li>Performance profiling and memory optimization</li>
+  <li>SIMD operations and cache-friendly algorithms</li>
+</ul>
+
+<h3 id="career-insights">Career Insights</h3>
+<ul>
+  <li>Transitioning from web development to quantitative finance</li>
+  <li>Building mathematical foundations for trading roles</li>
+  <li>Interview preparation for elite trading firms</li>
+  <li>Comparing different pathways into the industry</li>
+</ul>
+
+<h3 id="practical-projects">Practical Projects</h3>
+<ul>
+  <li>Building a cryptocurrency matching engine</li>
+  <li>Implementing algorithmic trading strategies</li>
+  <li>Exploring FPGA programming for ultra-low latency</li>
+  <li>Database optimization for financial data</li>
+</ul>
+
+<h2 id="my-background">My Background</h2>
+
+<p>Currently a Senior Software Engineer at Hoppa Group, where I’ve worked on:</p>
+<ul>
+  <li>Node.js microservices serving 500,000+ users</li>
+  <li>PostgreSQL optimization and scaling strategies</li>
+  <li>Elasticsearch implementation and performance tuning</li>
+  <li>DevOps and infrastructure automation</li>
+</ul>
+
+<p>With a mathematics degree and strong systems programming interests, I’m now focusing on the intersection of technology and financial markets.</p>
+
+<h2 id="whats-next">What’s Next?</h2>
+
+<p>Stay tuned for posts covering everything from C++ template metaprogramming to market microstructure analysis. Whether you’re interested in high-performance computing, financial technology, or career transitions, there should be something here for you.</p>
+
+<p>Let’s build something amazing together!</p>
+
+<hr />
+
+<p><em>Follow me on <a href="https://github.com/solomon-os">GitHub</a> for code examples and projects.</em></p>]]></content><author><name>Solomon Oladiran</name></author><category term="personal" /><category term="career" /><category term="introduction" /><category term="goals" /><category term="quantitative-finance" /><summary type="html"><![CDATA[Welcome to My Blog! After years of building web applications and microservices at scale, I’m embarking on an exciting transition into quantitative finance. This blog will document my journey and share technical insights along the way. What You Can Expect Technical Deep-Dives C++ optimization techniques for high-frequency trading System architecture for low-latency applications Performance profiling and memory optimization SIMD operations and cache-friendly algorithms Career Insights Transitioning from web development to quantitative finance Building mathematical foundations for trading roles Interview preparation for elite trading firms Comparing different pathways into the industry Practical Projects Building a cryptocurrency matching engine Implementing algorithmic trading strategies Exploring FPGA programming for ultra-low latency Database optimization for financial data My Background Currently a Senior Software Engineer at Hoppa Group, where I’ve worked on: Node.js microservices serving 500,000+ users PostgreSQL optimization and scaling strategies Elasticsearch implementation and performance tuning DevOps and infrastructure automation With a mathematics degree and strong systems programming interests, I’m now focusing on the intersection of technology and financial markets. What’s Next? Stay tuned for posts covering everything from C++ template metaprogramming to market microstructure analysis. Whether you’re interested in high-performance computing, financial technology, or career transitions, there should be something here for you. Let’s build something amazing together! Follow me on GitHub for code examples and projects.]]></summary></entry></feed>

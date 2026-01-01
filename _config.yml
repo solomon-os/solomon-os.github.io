@@ -9,12 +9,16 @@ url: "https://solomon-os.github.io"
 # Build settings
 markdown: kramdown
 highlighter: rouge
-permalink: /:title/
+permalink: /blog/:title/
+future: true
 
 # Plugins
 plugins:
   - jekyll-feed
   - jekyll-seo-tag
+
+# Excerpt settings
+excerpt_separator: <!--more-->
 
 # Exclude from build
 exclude:
@@ -22,9 +26,3 @@ exclude:
   - Gemfile.lock
   - README.md
   - vendor
-
-# Collections
-collections:
-  posts:
-    output: true
-    permalink: /blog/:title/
