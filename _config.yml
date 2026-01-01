@@ -1,0 +1,30 @@
+# Site settings
+title: Solomon's Blog
+description: A personal blog
+author: Solomon Oladiran
+email:
+baseurl: ""
+url: "https://solomon-os.github.io"
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
+permalink: /:title/
+
+# Plugins
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+
+# Exclude from build
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - vendor
+
+# Collections
+collections:
+  posts:
+    output: true
+    permalink: /blog/:title/
