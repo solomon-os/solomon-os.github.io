@@ -7,8 +7,7 @@ permalink: /about/
 # About Solomon
 
 ## Professional Background
-
-Senior Software Engineer at **Hoppa Group Limited**, a ride-booking platform serving over 500,000 users. I specialize in building scalable backend systems and optimizing performance at every level of the stack.
+I am software engineer that specialises in building backend systems, distributed systems, and optimising performance.
 
 ### Technical Expertise
 - **Languages**: Node.js, C++, PostgreSQL, JavaScript
@@ -19,7 +18,7 @@ Senior Software Engineer at **Hoppa Group Limited**, a ride-booking platform ser
 
 ### Current Transition
 
-I'm actively transitioning into **quantitative finance**, specifically targeting roles at elite trading firms like Jane Street, Citadel Securities, and Hudson River Trading. My focus areas include:
+I'm actively transitioning into **quantitative finance**. My focus areas include:
 
 - C++ optimization for ultra-low latency systems
 - Mathematical modeling and quantitative analysis
@@ -28,8 +27,8 @@ I'm actively transitioning into **quantitative finance**, specifically targeting
 
 ## Educational Background
 
-**Bachelor's Degree in Mathematics**
-Federal University of Technology Minna
+**Bachelor's Degree in Computer Science**
+University Of Abuja
 
 Currently rebuilding and strengthening my mathematical foundations with focus on:
 - Linear algebra and calculus
@@ -48,7 +47,7 @@ When not coding or studying mathematics, I enjoy:
 ## Contact
 
 - **GitHub**: [solomon-os](https://github.com/solomon-os)
-- **Email**: solomon@example.com
+- **Email**: sheghunoladiran9@gmail.com
 - **Blog**: [solomon-os.github.io](https://solomon-os.github.io)
 
 ---
