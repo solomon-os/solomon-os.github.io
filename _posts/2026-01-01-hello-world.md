@@ -32,13 +32,13 @@ After years of building web applications and microservices at scale, I'm embarki
 
 ## My Background
 
-Currently a Senior Software Engineer at Hoppa Group, where I've worked on:
+Currently a Senior Software Engineer at [redacted], where I've worked on:
 - Node.js microservices serving 500,000+ users
 - PostgreSQL optimization and scaling strategies
 - Elasticsearch implementation and performance tuning
 - DevOps and infrastructure automation
 
-With a mathematics degree and strong systems programming interests, I'm now focusing on the intersection of technology and financial markets.
+With a computer science degree and strong systems programming interests, I'm now focusing on the intersection of technology and financial markets.
 
 ## What's Next?
 
