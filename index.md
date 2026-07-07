@@ -5,7 +5,7 @@ title: Home
 
 # Welcome
 
-I'm Solomon, a software engineer exploring the intersection of high-performance computing and quantitative finance. This blog documents my technical journey.
+I'm Solomon, a software engineer exploring the intersection of high-performance computing and distributed systems. This blog documents my technical journey.
 
 ## Latest Posts
 
