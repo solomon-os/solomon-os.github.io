@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Memory Profiling in Go: How One Line Allocated 687GB Of Data"
+title: "Memory Profiling and Optimisation in Go: How One Line Allocated 687GB"
 date: 2026-07-07 10:00:00 +0000
 categories: [golang, performance]
 tags: [go, pprof, profiling, memory, redis, codecrafters]
@@ -55,7 +55,7 @@ $ ./main -pprof-addr=:3000
 
 ## Benchmark first
 
-With the profiler and application running, we need load — profiles of an idle server show nothing interesting. I wrote `stress.sh`, a small script that wraps `redis-benchmark` with the command below and prints a summary table of the results:
+With the profiler and application running, we need load; profiles of an idle server show nothing interesting. I wrote `stress.sh`, a small script that wraps `redis-benchmark` with the command below and prints a summary table of the results:
 
 ```bash
 $ redis-benchmark -p 6379 -t set,get,incr,lpush,lpop,lrange -n 300000 -r 1000000 -c 100 -d 128 -q
@@ -81,11 +81,11 @@ running: -t set,get,incr,lpop,lrange_100 -n 300000 -r 1000000 -c 100 -d 128 agai
 
 (The odd "needed to benchmark LRANGE" label is redis-benchmark's doing: whenever LRANGE is tested, it first runs an LPUSH phase to fill the lists. That pre-fill reports a normal stats row, so it doubles as our LPUSH benchmark.)
 
-One row ruins the party. LPUSH took roughly 70 of the 87 seconds and averaged ~4,100 rps — 14x slower than the next-slowest command (LRANGE). Worse, RPUSH is nearly the same operation, and it's **33x faster**. Something is clearly wrong with LPUSH, and there has to be an explanation.
+One row ruins the party. LPUSH took roughly 70 of the 87 seconds and averaged ~4,100 rps, 14x slower than the next-slowest command (LRANGE). Worse, RPUSH is nearly the same operation, and it's **33x faster**. Something is clearly wrong with LPUSH, and there has to be an explanation.
 
 ## Profile the CPU
 
-The answer is to measure. We're going to record a 60-second CPU profile while the benchmark runs — the command below asks the live server for a profile and drops us into pprof's interactive terminal:
+The answer is to measure. We're going to record a 60-second CPU profile while the benchmark runs. The command below asks the live server for a profile and drops us into pprof's interactive terminal:
 
 ```bash
 go tool pprof "http://localhost:3000/debug/pprof/profile?seconds=60"
@@ -116,7 +116,7 @@ Showing top 10 nodes out of 81
      1.08s  0.75% 97.13%      1.08s  0.75%  runtime.wbBufFlush1
 ```
 
-Interesting — and a dead end. The biggest CPU consumers are thread sleep/wake churn (`pthread_cond_signal`/`wait`) and network syscalls: the cost of a multi-threaded server juggling 100 concurrent clients. Our own functions don't even make the top 10, because command handling is in-memory work that's nearly invisible to a sampling profiler. Nothing here explains why LPUSH specifically is 33x slower than RPUSH — both would pay the same networking and scheduling costs.
+Interesting, and a dead end. The biggest CPU consumers are thread sleep/wake churn (`pthread_cond_signal`/`wait`) and network syscalls: the cost of a multi-threaded server juggling 100 concurrent clients. Our own functions don't even make the top 10, because command handling is in-memory work that's nearly invisible to a sampling profiler. Nothing here explains why LPUSH specifically is 33x slower than RPUSH; both would pay the same networking and scheduling costs.
 
 So if LPUSH isn't burning CPU on computation, maybe it's doing something else expensive. Could memory allocation be the bottleneck? Let's profile the memory:
 
@@ -147,7 +147,7 @@ Showing top 10 nodes out of 13
 
 Voila! There's our problem. During the benchmark, LPUSH allocated a total of **687GB** of memory.
 
-Hmm — that can't be right. These benchmarks ran on a 64GB MacBook; there's no way the application used 687GB of RAM. And it didn't: `alloc_space` measures *total allocated* memory, not *in-use* memory. LPUSH really did allocate 687GB over the course of the run, but almost all of it became garbage moments after being allocated, and the garbage collector kept reclaiming it. We can confirm by switching to the in-use view:
+Hmm, that can't be right. These benchmarks ran on a 64GB MacBook; there's no way the application used 687GB of RAM. And it didn't: `alloc_space` measures *total allocated* memory, not *in-use* memory. LPUSH really did allocate 687GB over the course of the run, but almost all of it became garbage moments after being allocated, and the garbage collector kept reclaiming it. We can confirm by switching to the in-use view:
 
 ```bash
 (pprof) sample_index=inuse_space
@@ -168,7 +168,7 @@ Showing top 10 nodes out of 22
          0     0% 99.60%   125.14MB 50.20%  github.com/codecrafters-io/redis-starter-go/internal/handler.(*Handler).handleCommand
 ```
 
-Only 249MB is actually being held by the application — LPUSH's contribution to live memory is a whole 4.58MB. So LPUSH generated 687GB of pure garbage. To find where, we switch back to `alloc_space` and ask pprof to annotate the function's source, line by line:
+Only 249MB is actually being held by the application, and LPUSH's contribution to live memory is a whole 4.58MB. So LPUSH generated 687GB of pure garbage. To find where, we switch back to `alloc_space` and ask pprof to annotate the function's source, line by line:
 
 ```bash
 (pprof) sample_index=alloc_space
@@ -231,7 +231,7 @@ push n:  allocate array of n   (copy n-1)
 total:   1+2+3+...+n = n(n+1)/2 ≈ n²/2
 ```
 
-The list itself only ever *holds* O(n) memory — that's why the in-use numbers looked normal — but the *total allocated over time* is O(n²), and that's exactly the quantity `alloc_space` measures. Our benchmark hammered 300k LPUSHes into a small set of lists, so the lists got long, every push paid to copy all of it, and n²/2 quietly integrated into 672GB. That number was never a size anything *was* — it's the area under the churn curve, all of it allocated, copied once, and handed straight to the garbage collector.
+The list itself only ever *holds* O(n) memory (that's why the in-use numbers looked normal), but the *total allocated over time* is O(n²), and that's exactly the quantity `alloc_space` measures. Our benchmark hammered 300k LPUSHes into a small set of lists, so the lists got long, every push paid to copy all of it, and n²/2 quietly integrated into 672GB. That number was never a size anything *was*; it's the area under the churn curve, all of it allocated, copied once, and handed straight to the garbage collector.
 
 Compare that with RPUSH, which was 33x faster:
 
@@ -239,7 +239,7 @@ Compare that with RPUSH, which was 33x faster:
 s.kvList[k] = append(s.kvList[k], v...)
 ```
 
-Same `append`, opposite behaviour. Appending to the *existing* slice lets Go's `append` use its growth strategy: when capacity runs out, it allocates double, so reallocations only happen at sizes 1, 2, 4, 8, ... n. Total copying across n pushes is about 2n — amortized O(1) per push. LPUSH can't benefit from that, because the spare capacity `append` leaves is at the *tail* of the array, and prepending needs room at the *head*. Every LPUSH lands on an exact-fit array and pays full price, every time.
+Same `append`, opposite behaviour. Appending to the *existing* slice lets Go's `append` use its growth strategy: when capacity runs out, it allocates double, so reallocations only happen at sizes 1, 2, 4, 8, ... n. Total copying across n pushes is about 2n, amortized O(1) per push. LPUSH can't benefit from that, because the spare capacity `append` leaves is at the *tail* of the array, and prepending needs room at the *head*. Every LPUSH lands on an exact-fit array and pays full price, every time.
 
 Two appends, six lines apart. One is O(1), the other is O(n²). I'd read this code a dozen times and never noticed. The profiler pointed at it in seconds.
 
@@ -247,7 +247,7 @@ Two appends, six lines apart. One is O(1), the other is O(n²). I'd read this co
 
 We need LPUSH to stop reallocating on every push. What if we create one array with two indices, `left` and `right`, and start writing from the middle? LPUSH writes leftward, RPUSH writes rightward, and only when either index hits the end of the array do we reallocate one twice the size, copy the elements into the middle, and reset the indices.
 
-There's a name for this data structure: an **array-backed deque** — a close cousin of the ring buffer (Java's `ArrayDeque` and Rust's `VecDeque` are built on the same idea). Both ends now get the same amortized O(1) treatment that `append` was giving RPUSH. You can see the [full diff here](https://github.com/solomon-os/redis-server/commit/ed0d5d243bed174975d63187ff49c12750a3d2f8).
+There's a name for this data structure: an **array-backed deque**, a close cousin of the ring buffer. Both ends now get the same amortized O(1) treatment that `append` was giving RPUSH. You can see the [full diff here](https://github.com/solomon-os/redis-server/commit/ed0d5d243bed174975d63187ff49c12750a3d2f8).
 
 We run the benchmark again:
 
@@ -266,7 +266,7 @@ running: -t set,get,incr,rpush,lpop,lrange_100 -n 300000 -r 1000000 -c 100 -d 12
 | LRANGE_100 (first 100 elements)        |     300000 |     5.00 |     60024.01 |    1.190 |    0.639 |    8.823 |
 | **TOTAL**                              |    2100000 |    17.85 |    117647.06 |          |          |          |
 
-LPUSH went from 4,196 to 140,581 requests per second — **33x faster**, now indistinguishable from RPUSH — and the whole suite dropped from 87 to 18 seconds. Purely from fixing how memory was allocated. One more look at the allocation profile to confirm:
+LPUSH went from 4,196 to 140,581 requests per second: **33x faster**, now indistinguishable from RPUSH. The whole suite dropped from 87 to 18 seconds. Purely from fixing how memory was allocated. One more look at the allocation profile to confirm:
 
 ```bash
 Entering interactive mode (type "help" for commands, "o" for options)
@@ -292,12 +292,9 @@ LPUSH is gone from the top 10 entirely. Total allocations for the same workload:
 
 ## Takeaways
 
-- **An empty profile is still an answer.** The CPU profile "failing" to show my code wasn't a dead end — it was the profiler correctly telling me the cost wasn't computation, which is what justified looking at memory.
-- **`alloc_space` and `inuse_space` answer different questions.** In-use tells you what's *holding* memory (footprint, leaks). Alloc tells you what's *generating garbage* (GC pressure). My 687GB existed in one view and was 4.58MB in the other — both numbers were true.
-- **Cumulative allocation is an area, not a size.** A quadratic algorithm can hide behind a perfectly normal live heap. The n²/2 sum is invisible to `top`, `htop`, and your dashboard — only the allocation profile sees it.
-- **The profiler finds what code review can't.** Two `append` calls, six lines apart, one O(1) and one O(n²). I'd read that code many times. `pprof list` found it in seconds and pointed at the exact line.
-
-This isn't the end of the story, either. That CPU profile showed two-thirds of the machine going to thread sleep/wake churn and syscalls — and while writing this post I discovered my server answers only the *first* of multiple pipelined commands sent in one packet. Fixing that bug changes the entire shape of the CPU profile, and it's the subject of the next post.
+- **An empty profile is still an answer.** The CPU profile "failing" to show my code wasn't a dead end. It was the profiler correctly telling me the cost wasn't computation, which is what justified looking at memory.
+- **`alloc_space` and `inuse_space` answer different questions.** In-use tells you what's *holding* memory (footprint, leaks). Alloc tells you what's *generating garbage* (GC pressure). My 687GB existed in one view and was 4.58MB in the other. Both numbers were true.
+- **Cumulative allocation is an area, not a size.** A quadratic algorithm can hide behind a perfectly normal live heap. The n²/2 sum is invisible to `top`, `htop`, and your dashboard; only the allocation profile sees it.
 
 ---
 
