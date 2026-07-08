@@ -6,7 +6,7 @@ categories: [golang, performance]
 tags: [go, pprof, profiling, memory, redis, codecrafters]
 ---
 
-I built a multi-threaded Redis clone in Go as part of the CodeCrafters challenge. It supports a subset of Redis features; you can check the project page for details.
+I built a multi-threaded [Redis clone in Go](https://github.com/solomon-os/redis-server) as part of the [CodeCrafters challenge](https://codecrafters.io). It supports a subset of Redis features; you can check the project page for details.
 
 I’ve been reading on profiling and optimisations in Go. So I decided to profile my Redis implementation and check how I can improve it. Note: this Redis project is not production code; I used some lazy implementations where faster alternatives are available.
 
@@ -15,7 +15,7 @@ This post is about profiling and memory optimisations in Go. I decided to write 
 ## Run the profiler
 To start tuning the program, we have to enable profiling. I used `http/pprof` to profile the server in real time.
 
-[see the diff](https://github.com/solomon-os/redis-server/commit/ae2b96bc3248a17f903c03f876d238fbbad3e8c4])
+[see the diff](https://github.com/solomon-os/redis-server/commit/ae2b96bc3248a17f903c03f876d238fbbad3e8c4)
 
 ```go
 	"net/http"
