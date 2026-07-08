@@ -362,3 +362,100 @@ button:focus-visible {
   outline: 2px solid var(--link-color);
   outline-offset: 2px;
 }
+
+/* ============================================
+   Syntax Highlighting (Rouge)
+   Palette tuned to the site's dark theme
+   ============================================ */
+.highlight .c, .highlight .c1, .highlight .cm, .highlight .cs,
+.highlight .cd { color: #7f848e; font-style: italic; }           /* comments */
+.highlight .k, .highlight .kd, .highlight .kn, .highlight .kp,
+.highlight .kr, .highlight .kv { color: #c678dd; }               /* keywords */
+.highlight .kt { color: #e5c07b; }                               /* types */
+.highlight .s, .highlight .s1, .highlight .s2, .highlight .sb,
+.highlight .sc, .highlight .sd, .highlight .se, .highlight .sh,
+.highlight .si, .highlight .sx, .highlight .sr,
+.highlight .ss { color: #98c379; }                               /* strings */
+.highlight .m, .highlight .mi, .highlight .mf, .highlight .mh,
+.highlight .mo, .highlight .mb, .highlight .mx,
+.highlight .il { color: #d19a66; }                               /* numbers */
+.highlight .nf, .highlight .fm { color: #61afef; }               /* functions */
+.highlight .nc, .highlight .nn { color: #e5c07b; }               /* classes/namespaces */
+.highlight .nb, .highlight .bp { color: #56b6c2; }               /* builtins */
+.highlight .nt { color: #e06c75; }                               /* tags */
+.highlight .na { color: #d19a66; }                               /* attributes */
+.highlight .nv, .highlight .vc, .highlight .vg,
+.highlight .vi { color: #e06c75; }                               /* variables */
+.highlight .o, .highlight .ow { color: #c678dd; }                /* operators */
+.highlight .p, .highlight .pi { color: #abb2bf; }                /* punctuation */
+.highlight .gp { color: #7f848e; user-select: none; }            /* shell prompt */
+.highlight .go { color: #9a9a9a; }                               /* shell output */
+.highlight .gd { color: #e06c75; background: rgba(224,108,117,.1); } /* diff del */
+.highlight .gi { color: #98c379; background: rgba(152,195,121,.1); } /* diff add */
+.highlight .gh, .highlight .gu { color: #61afef; font-weight: 600; }
+.highlight .err { color: inherit; background: none; }            /* no red boxes */
+.highlight .w { color: inherit; }
+
+/* ============================================
+   Tables
+   ============================================ */
+.post-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 2rem 0;
+  font-size: 0.9rem;
+  display: block;
+  overflow-x: auto;                 /* wide tables scroll, page doesn't */
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+}
+
+.post-content th,
+.post-content td {
+  padding: 0.6rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid var(--border-color);
+  white-space: nowrap;
+}
+
+.post-content th {
+  background: var(--bg-secondary);
+  color: var(--accent-color);
+  font-weight: 600;
+  border-bottom: 2px solid var(--border-color);
+}
+
+.post-content tr:last-child td {
+  border-bottom: none;
+}
+
+.post-content tbody tr:hover {
+  background: var(--bg-secondary);
+}
+
+/* numbers in tables read better in a monospace font */
+.post-content td:not(:first-child) {
+  font-family: 'SF Mono', 'Fira Code', Monaco, 'Courier New', monospace;
+  font-size: 0.85rem;
+}
+
+/* ============================================
+   Reading polish
+   ============================================ */
+.post {
+  max-width: 740px;               /* comfortable prose measure */
+  margin: 0 auto;
+}
+
+pre::-webkit-scrollbar {
+  height: 8px;
+}
+
+pre::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 4px;
+}
+
+pre::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
