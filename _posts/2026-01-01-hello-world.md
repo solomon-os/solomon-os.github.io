@@ -1,5 +1,6 @@
 ---
 layout: post
+published: false
 title: "Hello World - Starting My Technical Journey"
 date: 2026-01-01 10:00:00 +0000
 categories: [personal, career]
