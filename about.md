@@ -20,14 +20,6 @@ I'm a software engineer focused on **distributed systems, high-performance softw
 **Bachelor's Degree in Computer Science**
 University of Abuja
 
-## Personal Interests
-
-When not coding, I enjoy:
-
-- Fitness and strength training
-- Exploring Nigerian cuisine and culture
-- Contributing to open-source projects
-
 ## Contact
 
 - **GitHub**: [solomon-os](https://github.com/solomon-os)
