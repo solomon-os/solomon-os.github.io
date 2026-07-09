@@ -6,42 +6,26 @@ permalink: /about/
 
 # About Solomon
 
-## Professional Background
-I am a software engineer specialising in building backend and distributed systems and optimising performance, and most recently, quantitative finance and C++
+I'm a software engineer focused on **distributed systems, high-performance software, systems programming, and infrastructure**. I like taking systems apart to understand where the time and memory actually go, and this blog is where I write about it.
 
 ### Technical Expertise
-- **Languages**: Node.js, C++, PostgreSQL, JavaScript
-- **Architecture**: Microservices, distributed systems, API design
-- **Performance**: Database optimization, caching strategies, profiling
-- **DevOps**: CI/CD, containerization, infrastructure as code
-- **Emerging Focus**: High-frequency trading systems, algorithmic finance
 
-### Current Transition
+- **Systems**: Distributed systems, systems programming, network servers
+- **Performance**: Profiling, memory optimization, caching strategies, database tuning
+- **Languages**: Go, C++, JavaScript/Node.js, SQL
+- **Infrastructure**: CI/CD, containerization, infrastructure as code
 
-I'm actively transitioning into **quantitative finance**. My focus areas include:
-
-- C++ optimization for ultra-low latency systems
-- Mathematical modeling and quantitative analysis
-- High-performance computing and parallel programming
-- Financial markets and trading system architecture
-
-## Educational Background
+## Education
 
 **Bachelor's Degree in Computer Science**
-University Of Abuja
-
-Currently rebuilding and strengthening my mathematical foundations with focus on:
-- Linear algebra and calculus
-- Probability theory and statistics
-- Competitive mathematics and problem-solving
-- Financial mathematics and derivatives pricing
+University of Abuja
 
 ## Personal Interests
 
-When not coding or studying mathematics, I enjoy:
+When not coding, I enjoy:
+
 - Fitness and strength training
 - Exploring Nigerian cuisine and culture
-- Reading about financial markets and economic policy
 - Contributing to open-source projects
 
 ## Contact
@@ -52,4 +36,4 @@ When not coding or studying mathematics, I enjoy:
 
 ---
 
-*Always open to discussing technology, quantitative finance, or potential collaboration opportunities.*
+*Always open to discussing technology, systems, or potential collaboration opportunities.*
