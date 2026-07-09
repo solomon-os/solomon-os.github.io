@@ -8,6 +8,8 @@ permalink: /about/
 
 I'm a software engineer focused on **distributed systems, high-performance software, systems programming, and infrastructure**. I like taking systems apart to understand where the time and memory actually go, and this blog is where I write about it.
 
+**Currently open to remote senior Go / systems roles.** Reach out via [email](mailto:sheghunoladiran9@gmail.com).
+
 ### Technical Expertise
 
 - **Systems**: Distributed systems, systems programming, network servers
