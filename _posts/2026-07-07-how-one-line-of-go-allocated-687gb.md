@@ -4,6 +4,8 @@ title: "Memory Profiling and Optimisation in Go: How One Line Allocated 687GB"
 date: 2026-07-07 10:00:00 +0000
 categories: [golang, performance]
 tags: [go, pprof, profiling, memory, redis, codecrafters]
+image: /assets/images/cpu-pprof.png
+description: "A pprof deep-dive into my Go Redis clone: the CPU profile was a dead end, the allocation profile found one line generating 687GB of garbage, and an array-backed deque made LPUSH 33x faster."
 ---
 
 I built a multi-threaded [Redis clone in Go](https://github.com/solomon-os/redis-server) as part of the [CodeCrafters challenge](https://codecrafters.io). It supports a subset of Redis features; you can check the project page for details.
