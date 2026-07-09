@@ -13,7 +13,7 @@ I'm a software engineer focused on **distributed systems, high-performance softw
 - **Systems**: Distributed systems, systems programming, network servers
 - **Performance**: Profiling, memory optimization, caching strategies, database tuning
 - **Languages**: Go, C++, JavaScript/Node.js, SQL
-- **Infrastructure**: CI/CD, containerization, infrastructure as code
+- **Infrastructure**: Kubernetes, CI/CD, containerization, infrastructure as code
 
 ## Education
 
